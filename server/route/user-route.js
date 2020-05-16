@@ -6,6 +6,15 @@ const router = express.Router();
 
 router.route("/register").post(userController.register);
 router.route("/login").post(userController.login);
-router.route("/:id/note").post(userController.makeNote);
+router
+  .route("/:userID/note")
+  .post(userController.makeNote)
+  .get(userController.getAllMyNotes);
+
+router
+  .route("/:userID/note/:noteID")
+  .get(userController.getMyOneNote)
+  .patch(userController.updateNote)
+  .delete(userController.deleteNote);
 
 module.exports = router;
