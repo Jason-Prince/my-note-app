@@ -1,4 +1,5 @@
 const User = require("../model/user-model");
+const Note = require("../model/note-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -36,6 +37,27 @@ module.exports = {
         expiresIn: "1h",
       });
       res.status(200).json({ token });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  makeNote: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      // Create new note
+      const newNote = new Note(req.body);
+      // Get user
+      const user = await User.findById(id);
+      // Assign a user as a note's creator
+      newNote.user = user;
+      // Save new note
+      await newNote.save();
+      // Add note to the user's note array
+      user.note.push(newNote);
+      // Save the user
+      await user.save();
+      res.status(201).json(newNote);
     } catch (error) {
       next(error);
     }
