@@ -14,18 +14,18 @@ import { Navbar } from "./components/NavBar";
 function App() {
   return (
     <>
-      <Navbar />
-      <Layout>
-        <Router>
+      <Router>
+        <Navbar />
+        <Layout>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/note" component={Note} />
-            <Route exact path="/notes" component={Notes} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/note" component={Note} />
+            <Route path="/notes" component={Notes} />
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </>
   );
 }
