@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const morgan = require("morgan");
 
 const userRoute = require("./route/user-route");
 
@@ -21,10 +20,9 @@ db.once("open", () => {
   console.log("Connected to database");
 });
 
-app.use(morgan());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.use("/user", userRoute);
+app.use("/api", userRoute);
 
 module.exports = app;

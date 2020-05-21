@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./UserContext";
+import { Card } from "./Card";
 
-export const Notes = () => (
-  <>
-    <h1>Notes</h1>
-  </>
-);
+export const Notes = () => {
+  const { notes, updateHandler, deleteHander } = useContext(UserContext);
+  return (
+    <>
+      {notes.map((item) => (
+        <Card
+          key={item._id}
+          title={item.title}
+          comment={item.comment}
+          updateHandler={updateHandler}
+          deleteHander={deleteHander}
+        />
+      ))}
+    </>
+  );
+};
